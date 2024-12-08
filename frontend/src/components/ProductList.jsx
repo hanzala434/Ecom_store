@@ -28,13 +28,10 @@ const ProductList = () => {
         <h2 className="text-2xl font-bold tracking-tight text-gray-900 text-center">Popular Products</h2>
 
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-        {popularList && popularList.length > 0 ? (
-            popularList.map((product) => (
+        {popularList.map((product) => (
               <PopularItem key={product._id} product={product} />
             ))
-          ) : (
-            <p>No popular products available</p>
-          )}
+          }
         </div>
       </div>
     </div>
