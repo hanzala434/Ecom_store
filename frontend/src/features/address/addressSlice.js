@@ -108,7 +108,7 @@ const addressSlice = createSlice({
       .addCase(addNewAddress.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.addresses.push(action.payload);
+        state.addresses=action.payload;
       })
       .addCase(addNewAddress.rejected, (state, action) => {
         state.isLoading = false;

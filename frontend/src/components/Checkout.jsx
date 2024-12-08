@@ -32,6 +32,10 @@ const handleOnClick = (id) => {
   dispatch(fetchCart(userId));
   navigate(`/orders/${id}`);
 };
+
+const handleOnClick2=()=>{
+  navigate('/addressForm')
+}
   
   return (
     <>
@@ -40,6 +44,7 @@ const handleOnClick = (id) => {
     <div class="mx-auto max-w-3xl">
     <div className="mt-6 space-y-4 border-b border-t border-gray-200 py-8 dark:border-gray-700 sm:mt-8">
         <h4 className="text-lg font-semibold text-gray-900 dark:text-white">Billing & Delivery information</h4>
+        <button onClick={handleOnClick2}>Add New Address</button>
        {addresses?.data?.length > 0 ? (
             addresses.data.map((address) => (
               <dl key={address._id}>
