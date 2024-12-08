@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/api/order";
+const API_URL = `${process.env.REACT_APP_API}/api/order`;
 
 // Create a new order
 const createOrder = async (orderData) => {

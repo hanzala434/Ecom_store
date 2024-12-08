@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8080/api/cart';
+const API_URL = `${process.env.REACT_APP_API}/api/cart`;
 
 // Fetch the cart for a user
 const getCart = async (userId) => {
