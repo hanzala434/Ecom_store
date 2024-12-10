@@ -6,7 +6,7 @@ const OrderCard = ({orderDetails}) => {
   return (
    <>
          <div className='p-10 bg-slate-400 rounded-lg flex flex-col w-auto m-4 lg:m-auto lg:w-4/6'>
-            <h1 className='text-2xl font-bold flex justify-center m-auto'>Order #{orderDetails._id}</h1>
+            <h1 className='text-2xl font-bold flex justify-center m-auto max-lg:text-xl'>Order #{orderDetails._id}</h1>
             <div className='ml-2 flex flex-col content-center m-auto p-4'>
             <h3 className='text-xl p-1'>Name: {orderDetails.userName}</h3>
             <h3 className='text-xl p-1'>User Id: {orderDetails.userId}</h3>

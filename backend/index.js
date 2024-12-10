@@ -9,7 +9,10 @@ const cors=require('cors')
 connectDB();
 const app=express();
 //middleware
-app.use(cors({ origin: 'https://ecom-store-9ttd.vercel.app' }))
+// app.use(cors({ origin: 'https://ecom-store-9ttd.vercel.app' }))
+app.use(cors({ origin: 'http://localhost:3000' }))
+
+http://localhost:3000
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 //app.use(morgan('dev'));

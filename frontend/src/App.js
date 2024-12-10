@@ -15,6 +15,10 @@ import AdminDashboard from './pages/AdminDashboard';
 import OrderDetailAdmin from './pages/OrderDetailAdmin';
 import UserOrdersPage from './pages/UserOrdersPage';
 import OrderConfirmed from './pages/OrderConfirmed';
+import ResetPassPage from './pages/ResetPassPage';
+import GoogleLoginPage from './pages/GoogleLoginPage';
+import LoginGoogle from './components/LoginGoogle';
+
 
 
 function App() {
@@ -26,6 +30,9 @@ function App() {
       <Route path='/contact-us' element={<ContactPage/>}/>
       <Route path='/register' element={<Register/>}/>
       <Route path='/login' element={<Login/>}/>
+      <Route path='/google-login' element={<LoginGoogle/>}/>
+      <Route path='/google-user' element={<GoogleLoginPage/>}/>
+      <Route path='/reset-password' element={<ResetPassPage/>}/>
       <Route path='/product/:id' element={<ProductPage/>}/>
       <Route path='/category' element={<CategoryPage/>}/>
       <Route path='/checkout' element={<CheckoutPage/>}/>

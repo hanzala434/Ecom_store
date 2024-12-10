@@ -87,7 +87,7 @@ const ProductFeatures = ({product}) => {
  
 
             {/* Image gallery */}
-            <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
+            <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8 max-lg:m-4">
   {/* Main Image */}
   {product.images?.map((image, index) => (
             <img
@@ -96,7 +96,7 @@ const ProductFeatures = ({product}) => {
               alt={`Product image ${index + 1}`}
               className={classNames(
                 index === 0 ? 'lg:block' : '',
-                'rounded-lg object-cover',
+                'rounded-lg object-cover max-lg:m-2 max-lg:w-full',
                 index === 2 ? 'lg:aspect-[3/4]' : 'lg:aspect-[4/5]'
               )}
             />

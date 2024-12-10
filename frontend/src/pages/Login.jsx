@@ -7,9 +7,16 @@ import { useNavigate } from 'react-router-dom'
 import { useSelector,useDispatch } from 'react-redux'
 import { login,reset } from '../features/auth/authSlice'
 import Spinner from '../components/Spinner'
-import EagleNiche from '../assets/EagleNiche.PNG'
+import merge from '../assets/merge.png'
+import { GoogleLogin } from '@react-oauth/google';
+import {jwtDecode} from 'jwt-decode';
+import { googleLogin } from '../features/auth/authSlice';
+
+
+
 
 const Login = () => {
+
   const [formData,setFormData]=useState({
     email:'',
     password:'',
@@ -49,17 +56,39 @@ dispatch(login(userData))
 navigate('/');
 };
 
-if(isLoading){
-  return <Spinner/>
-}
+const handleGoogleSuccess = async (response) => {
+  try {
+    const decoded = jwtDecode(response.credential);
+    const googleUser = {
+      token: response.credential,
+      email: decoded.email,
+      name: decoded.name,
+    };
+    console.log(googleUser.token)
+    // Dispatch the Google login action
+    dispatch(googleLogin(googleUser.token));
+    navigate('/')
+  } catch (error) {
+    console.error('Error decoding Google token:', error);
+    toast.error('Google Sign-In failed');
+  }
+};
 
+
+const handleGoogleError = () => {
+  toast.error('Google Sign-In failed');
+};
+
+if (isLoading) {
+  return <Spinner />;
+}
   return (
     <Layout title="Login - Ecommer App">
        <div className="flex min-h-full flex-1 flex-col justify-center mt-16 px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
             alt="Your Company"
-            src={EagleNiche}
+            src={merge}
             className="mx-auto h-16 w-auto"
           />
           <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
@@ -121,6 +150,7 @@ if(isLoading){
               </button>
             </div>
           </form>
+          <GoogleLogin onSuccess={handleGoogleSuccess} onError={handleGoogleError} />
 
         </div>
       </div>

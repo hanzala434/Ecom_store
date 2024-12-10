@@ -7,10 +7,11 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react'
 import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import EagleNiche from '../../assets/EagleNiche.PNG'
+import merge from '../../assets/merge.png'
 import ShoppingCart from '../ShoppingCart';
 import { toast } from 'react-hot-toast'
 import { fetchCart } from '../../features/cart/cartSlice';
+import avatar from '../../assets/avatar.png'
 
 const Header = () => {
   const navigate=useNavigate()
@@ -37,7 +38,8 @@ const navigation = [
   { name: 'About us', href: '/about-us' },
   { name: 'Contact', href: '/contact-us' },
   { name: 'Categories', href: '/category' },
-  { name:'Orders',href:`/your-orders/${userId}`}
+  { name:'Orders',href:`/your-orders/${userId}`},
+
 
 ]
 
@@ -83,7 +85,7 @@ const handleCartClick = (e) => {
           <span className="sr-only">Your Company</span>
           <img
             alt=""
-            src={EagleNiche}
+            src={merge}
             className="h-16 w-auto"
           />
         </a>
@@ -146,6 +148,13 @@ const handleCartClick = (e) => {
         <button onClick={onLogOut} className="text-sm/6 font-semibold text-slate-900">
           Logout <span aria-hidden="true">&rarr;</span>
         </button>
+        <div className="flex m-2">
+            <img
+          alt=""
+          src={avatar}
+          className="inline-block size-10 rounded-full ring-2 ring-white"
+        />
+        </div>
       </div>
     ):(
       <>
@@ -172,7 +181,7 @@ const handleCartClick = (e) => {
               <ShoppingCart open={cartOpen} setOpen={setCartOpen}  />
 
             </div>
-    
+      
 
  
     </nav>
@@ -184,7 +193,7 @@ const handleCartClick = (e) => {
                 <span className="sr-only">Your Company</span>
                 <img
                   alt=""
-                  src={EagleNiche}
+                  src={merge}
                   className="h-8 w-auto"
                 />
               </a>

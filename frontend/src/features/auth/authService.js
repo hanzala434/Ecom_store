@@ -26,10 +26,23 @@ const login=async(userData)=>{
 const logout=async()=>{
     localStorage.removeItem('user')
 }
+
+const googleLogin = async (googleToken) => {
+    console.log({googleToken});
+    const res = await axios.post(API_URL + '/google-login',  {googleToken});
+    console.log(res.data)
+    if (res.data) {
+        localStorage.setItem('user', JSON.stringify(res.data));
+    }
+    return res.data;
+};
+
+
 const authService={
     register,
     logout,
-    login
+    login,
+    googleLogin
 }
 
 export default authService

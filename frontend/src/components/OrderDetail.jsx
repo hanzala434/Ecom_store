@@ -71,6 +71,7 @@ const OrderDetail = () => {
     };
     console.log(orderData);
     dispatch(createNewOrder(orderData ))
+    navigate(`/your-orders/${userId}`)
     };
 
 

@@ -24,7 +24,7 @@ const PopularItem = ({product}) => {
               />
               <div className="mt-4 flex justify-between">
                 <div>
-                  <h3 className="text-sm text-gray-700">
+                  <h3 className="text-sm text-gray-700 max-lg:text-xl">
                     <a href={product._id}>
                       <span aria-hidden="true" className="absolute inset-0" />
                       {product.name}
@@ -32,7 +32,7 @@ const PopularItem = ({product}) => {
                   </h3>
                   {/* <p className="mt-1 text-sm text-gray-500">{product.color}</p> */}
                 </div>
-                <p className="text-sm font-medium text-gray-900">{product.price}</p>
+                <p className="text-sm font-medium text-gray-900 max-lg:text-xl">{product.price}</p>
               </div>
             </div>
    </>

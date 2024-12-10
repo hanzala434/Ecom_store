@@ -39,7 +39,7 @@ const handleOnClick2=()=>{
   
   return (
     <>
-    <section className="bg-white py-8 antialiased dark:bg-gray-900 md:py-16">
+    <section className="bg-white py-8 antialiased dark:bg-gray-900 md:py-16 max-lg:mt-16 m-2 p-2">
     
     <div class="mx-auto max-w-3xl">
     <div className="mt-6 space-y-4 border-b border-t border-gray-200 py-8 dark:border-gray-700 sm:mt-8">
@@ -55,7 +55,7 @@ const handleOnClick2=()=>{
                   {address.address}
                 </dd>
                 <button  onClick={() => handleOnClick(address._id)} 
-                type="button" data-modal-target="billingInformationModal" data-modal-toggle="billingInformationModal" className="text-base font-medium text-primary-700 hover:underline dark:text-primary-500">Confirm</button>
+                type="button" data-modal-target="billingInformationModal" data-modal-toggle="billingInformationModal" className="text-base font-medium hover:underline dark:text-primary-500">Confirm</button>
               </dl>
 
             ))
