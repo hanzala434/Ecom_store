@@ -1,12 +1,11 @@
 import React from 'react'
-import Layout from '../components/layout/Layout'
-import Dashboard from '../components/Dashboard'
 import AdminHeader from '../components/layout/AdminHeader'
+import DashboardWedgets from '../components/DashboardWedgets'
 const AdminDashboard = () => {
   return (
     <>
     <AdminHeader/>
-    <Dashboard/>
+    <DashboardWedgets/>
     </>
   )
 }

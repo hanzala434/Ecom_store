@@ -27,13 +27,11 @@ const createCategory = asyncHandler(async (req, res) => {
     }
 });
 
-// Get all categories
 const getCategory = asyncHandler(async (req, res) => {
     const category = await Category.find();
     res.status(200).json(category);
 });
 
-// Get a single category by ID
 const getCategoryById = asyncHandler(async (req, res) => {
     const category = await Category.findById(req.params.id);
 
@@ -45,7 +43,6 @@ const getCategoryById = asyncHandler(async (req, res) => {
     }
 });
 
-// Update a category
 const updateCategory = asyncHandler(async (req, res) => {
     const { name, image, imageAlt,description} = req.body;
 
@@ -66,7 +63,7 @@ const updateCategory = asyncHandler(async (req, res) => {
     }
 });
 
-// Delete a category
+
 const deleteCategory = asyncHandler(async (req, res) => {
     const category = await Category.findById(req.params.id);
 

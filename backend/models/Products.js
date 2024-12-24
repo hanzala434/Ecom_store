@@ -16,22 +16,22 @@ const productSchema = new mongoose.Schema({
         required: true,
     },
     images: [{
-        type: String, // URLs or file paths for images
+        type: String, 
         required: true,
     }],
     colors: [{
         name: {
-            type: String, // Color name or code
+            type: String, 
             required: true,
         },
     }],
     sizes: [{
         name: {
-            type: String, // Size name like S, M, L, XL
+            type: String, 
             required: true,
         },
         instoke: {
-            type: Boolean, // Whether the size is in stock
+            type: Boolean, 
             required: true,
             default: true,
         },
@@ -41,16 +41,16 @@ const productSchema = new mongoose.Schema({
         required: true,
     },
     highlights: {
-        type: [String], // Array of highlight points
+        type: [String], 
         required: true,
     },
     details: {
-        type: String, // Detailed information about the product
+        type: String,
         required: true,
     },
     popular: {
-        type: Boolean, // Indicates if the product is popular
-        default: false, // Default value is false
+        type: Boolean, 
+        default: false, 
     },
 }, { timestamps: true });
 

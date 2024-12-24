@@ -89,7 +89,7 @@ const googleLogin = asyncHandler(async (req, res) => {
     }
   
     try {
-      // Verify the Google token
+     
       const ticket = await client.verifyIdToken({
         idToken: googleToken,
         audience: process.env.GOOGLE_CLIENT_ID,
@@ -98,22 +98,20 @@ const googleLogin = asyncHandler(async (req, res) => {
       const payload = ticket.getPayload();
       const { email, name } = payload;
   
-      // Check if the user exists in the database
+     
       let user = await User.findOne({ email });
   
       if (!user) {
-        // Register the user if they do not exist
-        const hashedPassword = await hashPassword(email + process.env.JWT_SECRET); // Use a derived password
+        const hashedPassword = await hashPassword(email + process.env.JWT_SECRET); 
         user = await User.create({
           name,
           email,
           password:hashedPassword,
-          address,
-          phone
+          address:'',
+          phone:''
         });
       }
   
-      // Generate a JWT token
       const token = generateToken(user.id, user.role);
   
       res.status(200).json({

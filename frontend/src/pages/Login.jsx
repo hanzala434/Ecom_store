@@ -150,7 +150,9 @@ if (isLoading) {
               </button>
             </div>
           </form>
+          <div className='m-2 p-2'>
           <GoogleLogin onSuccess={handleGoogleSuccess} onError={handleGoogleError} />
+          </div>
 
         </div>
       </div>

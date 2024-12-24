@@ -15,7 +15,7 @@ const CategoryItem = ({category}) => {
       };
   return (
     <>
-    <div key={category.name} className="group relative">
+    <div key={category.name} className="group relative m-4">
                 <img
                   alt={category.imageAlt}
                   src={category.image}

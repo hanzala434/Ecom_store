@@ -47,9 +47,10 @@ export const fetchProduct = createAsyncThunk('products/fetch', async (id, thunkA
 });
 
 // Add new product
-export const addProduct = createAsyncThunk('products/add', async (productData, thunkAPI) => {
+export const addProduct = createAsyncThunk('products/add', async ({productData,id}, thunkAPI) => {
     try {
-        const id=thunkAPI.getState().vendor.vendorSingle._id
+        console.log(productData);
+        console.log(id);
         return await productService.addProduct(productData,id);
     } catch (error) {
         const message = (error.response && error.response.data && error.response.data.message) ||

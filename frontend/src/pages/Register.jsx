@@ -7,6 +7,10 @@ import "../styles/AuthStyle.css"
 import { useSelector,useDispatch } from 'react-redux'
 import { register,reset } from '../features/auth/authSlice'
 import Spinner from '../components/Spinner'
+import { GoogleLogin } from '@react-oauth/google'
+import merge from '../assets/merge.png'
+import {jwtDecode} from 'jwt-decode';
+import { googleLogin } from '../features/auth/authSlice';
 
 const Register = () => {
    const [formData,setFormData]=useState({
@@ -41,6 +45,29 @@ const onChange=(e)=>{
     }))
 }
 
+const handleGoogleSuccess = async (response) => {
+  try {
+    const decoded = jwtDecode(response.credential);
+    const googleUser = {
+      token: response.credential,
+      email: decoded.email,
+      name: decoded.name,
+    };
+    console.log(googleUser.token)
+    // Dispatch the Google login action
+    dispatch(googleLogin(googleUser.token));
+    navigate('/')
+  } catch (error) {
+    console.error('Error decoding Google token:', error);
+    toast.error('Google Sign-In failed');
+  }
+};
+
+
+const handleGoogleError = () => {
+  toast.error('Google Sign-In failed');
+};
+
 const handleSubmit=async(e)=>{
   e.preventDefault();
   const userData={
@@ -60,87 +87,127 @@ const handleSubmit=async(e)=>{
 
   return (
     <Layout title="Register - Ecommer App">
-    <div className="form-container ">
-      <form onSubmit={handleSubmit}>
-        <h4 className="title">REGISTER FORM</h4>
-        <div className="mb-3">
-          <input
-            type="text"
-            className="form-control"
-            id='name'
-            name='name'
-            value={name}
-            onChange={onChange}
-            placeholder="Enter Your Name"
-            required
-            autoFocus
-          />
-        </div>
-        <div className="mb-3">
-          <input
-            type="email"
-            name='email'
-            value={email}
-            onChange={onChange}
-            className="form-control"
-            id="email"
-            placeholder="Enter Your Email "
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <input
-            type="password"
-            name='password'
-            value={password}
-            onChange={onChange}
-            className="form-control"
-            id="password"
-            placeholder="Enter Your Password"
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <input
-            type="text"
-            name='phone'
-            value={phone}
-            onChange={onChange}
-            className="form-control"
-            id="phone"
-            placeholder="Enter Your Phone"
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <input
-            type="text"
-            name='address'
-            value={address}
-            onChange={onChange}
-            className="form-control"
-            id="address"
-            placeholder="Enter Your Address"
-            required
-          />
-        </div>
-        {/* <div className="mb-3">
-          <input
-            type="text"
-            value={answer}
-            onChange={(e) => setAnswer(e.target.value)}
-            className="form-control"
-            id="exampleInputEmail1"
-            placeholder="What is Your Favorite sports"
-            required
-          />
-        </div> */}
-        <button type="submit" className="btn btn-primary">
-          REGISTER
-        </button>
-      </form>
-    </div>
-  </Layout>
+    <div className="flex min-h-full flex-1 flex-col justify-center mt-16 px-6 py-12 lg:px-8">
+     <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+       <img
+         alt="Your Company"
+         src={merge}
+         className="mx-auto h-16 w-auto"
+       />
+       <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
+        Create New Account
+       </h2>
+     </div>
+
+     <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
+       <form onSubmit={handleSubmit} className="space-y-6">
+         <div>
+           <label className="block text-sm/6 font-medium text-gray-900">
+             Email address
+           </label>
+           <div className="mt-1">
+             <input
+               id="email"
+               name="email"
+               type="email"
+               value={email}
+               onChange={onChange}
+               required
+               autoComplete="email"
+               className=" w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+             />
+           </div>
+         </div>
+
+         <div>
+           <label  className="block text-sm/6 font-medium text-gray-900">
+             Name
+           </label>
+           <div className="mt-1">
+             <input
+               id="name"
+               name="name"
+               type="text"
+               value={name}
+               onChange={onChange}
+               required
+               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+             />
+           </div>
+         </div>
+
+         <div>
+           <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
+             Phone
+           </label>
+           <div className="mt-2">
+             <input
+               id="phone"
+               name="phone"
+               type="text"
+               value={phone}
+               onChange={onChange}
+               
+               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+             />
+           </div>
+         </div>
+
+         <div>
+           <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
+             Address
+           </label>
+           <div className="mt-2">
+             <input
+               id="address"
+               name="address"
+               type="text"
+               value={address}
+               onChange={onChange}
+               
+              
+               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+             />
+           </div>
+         </div>
+
+         <div>
+           <div className="flex items-center justify-between">
+             <label htmlFor="password" className="block text-sm/6 font-medium text-gray-900">
+               Password
+             </label>
+             
+           </div>
+           <div className="mt-2">
+             <input
+               id="password"
+               name="password"
+               value={password}
+               onChange={onChange}
+               type="password"
+               required
+               autoComplete="current-password"
+               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+             />
+           </div>
+         </div>
+
+         <div>
+           <button
+             type="submit"
+             className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+           >
+             Sign Up
+           </button>
+         </div> 
+       </form>
+       <div className='m-2 p-2'>
+       <GoogleLogin onSuccess={handleGoogleSuccess} onError={handleGoogleError} />
+       </div>
+
+     </div>
+   </div>
+</Layout>
   )
 }
 

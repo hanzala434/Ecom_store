@@ -18,6 +18,11 @@ import OrderConfirmed from './pages/OrderConfirmed';
 import ResetPassPage from './pages/ResetPassPage';
 import GoogleLoginPage from './pages/GoogleLoginPage';
 import LoginGoogle from './components/LoginGoogle';
+import ProductFormPage from './pages/ProductFormPage';
+import OrderListPage from './pages/OrderListPage';
+import CategoryAdmin from './pages/CategoryAdmin';
+import CategoryFormPage from './pages/CategoryFormPage';
+import AdminProductPage from './pages/AdminProductPage';
 
 
 
@@ -41,8 +46,18 @@ function App() {
       <Route path='/category/:id' element={<CategoryProducts/>}/>
       <Route path='/your-orders/:id' element={<UserOrdersPage/>}/>
       <Route path='/your-orders/order/:id' element={<OrderConfirmed/>}/>
+
+      //Admin Routes
       <Route path='/adminDashboard' element={<AdminDashboard/>}/>
       <Route path='/adminDashboard/order/:id' element={<OrderDetailAdmin/>}/>
+      <Route path='/admin-orders' element={<OrderListPage/>}/>
+      <Route path='/admin-category' element={<CategoryAdmin/>}/>
+      <Route path='/admin-products/:id' element={<AdminProductPage/>}/>
+      <Route path='/add-product/:id' element={<ProductFormPage/>}/>
+      <Route path='/add-category' element={<CategoryFormPage/>}/>
+
+
+
 
       <Route path='*' element={<PageNotFound/>}/>
 

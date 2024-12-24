@@ -25,7 +25,10 @@ const getProductById = async (id) => {
 
 // Add a new product
 const addProduct = async (productData,id) => {
-    const res = await axios.post(`${API_URL}/${id}`, productData);
+    console.log(productData);
+    console.log(id);
+    const res = await axios.post(`${API_URL}/create/${id}`, productData);
+    console.log(res.data);
     return res.data;
 };
 

@@ -1,13 +1,15 @@
 const Product = require('../models/Products');
 const Category = require('../models/Category');
 const asyncHandler = require('express-async-handler');
+const path = require('path');
 
-// Create a new product
+
+
 const createProduct = asyncHandler(async (req, res) => {
-    const { name, price, images, colors, sizes, description, highlights, details, popular } = req.body;
+    const { name, price, colors, sizes, description, highlights, details, popular,images } = req.body;
 
-    // Validate fields
-    if (!name || !price || !images || !colors || !sizes || !description || !highlights || !details) {
+
+    if (!name || !price  || !colors || !images|| !sizes || !description || !highlights || !details) {
         res.status(400);
         throw new Error('Please add all fields');
     }
@@ -18,18 +20,18 @@ const createProduct = asyncHandler(async (req, res) => {
         throw new Error('Category not found');
     }
 
-    // Create new product
+
     const product = await Product.create({
         name,
         price,
-        images,
+        images, 
         colors,
         sizes,
         description,
         highlights,
         details,
         category: req.params.id,
-        popular: popular || false, // Default to false if not provided
+        popular: popular || false,
     });
 
     if (product) {
@@ -40,19 +42,19 @@ const createProduct = asyncHandler(async (req, res) => {
     }
 });
 
-// Get all products
+
 const getProducts = asyncHandler(async (req, res) => {
     const products = await Product.find({ category: req.params.id });
     res.status(200).json(products);
 });
 
-// Get all popular products
+
 const getPopularProducts = asyncHandler(async (req, res) => {
     const popularProducts = await Product.find({ popular: true });
     res.status(200).json(popularProducts);
 });
 
-// Get a single product by ID
+
 const getProductById = asyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
 
@@ -64,7 +66,8 @@ const getProductById = asyncHandler(async (req, res) => {
     }
 });
 
-// Update a product
+
+
 const updateProduct = asyncHandler(async (req, res) => {
     const { name, price, images, colors, sizes, description, highlights, details, popular } = req.body;
 
@@ -89,7 +92,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     }
 });
 
-// Delete a product
+
 const deleteProduct = asyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
 

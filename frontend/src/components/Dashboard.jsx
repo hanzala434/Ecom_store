@@ -41,20 +41,20 @@ const handleOnClick=(orderId)=>{
   return (
     <>
     
-    <section className='p-2'>
+    <section className='p-4 mt-5 m-4'>
     <ul role="list" className="divide-y divide-gray-100">
       {orderList.map((order) => (
         <li key={order} className="flex justify-between gap-x-6 py-5">
-          <div className="flex min-w-0 gap-x-4">
-            <img alt="" src={order.imageUrl} className="size-12 flex-none rounded-full bg-gray-50" />
+          <div onClick={() => handleOnClick(order._id)} className="flex min-w-0 gap-x-4">
+            <img alt="" src={order.cartItems[0].image} className="size-12 flex-none rounded-full bg-gray-50" />
             <div className="min-w-0 flex-auto">
               <p className="text-sm/6 font-semibold text-gray-900">{order.userName}</p>
               <p className="mt-1 truncate text-xs/5 text-gray-500">Order Number: #{order._id}</p>
             </div>
-          </div>
+          </div >
           <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
             <p className="text-sm/6 text-gray-900">{order.role}</p>
-            <button onClick={() => handleOnClick(order._id)}>See Details</button>  
+            <button >Dispatched</button>  
           </div>
         </li>
       ))}
