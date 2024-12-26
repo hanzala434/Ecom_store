@@ -12,8 +12,8 @@ const path = require('path');
 connectDB();
 const app=express();
 //middleware
- app.use(cors({ origin: 'https://ecom-store-9ttd.vercel.app' }))
-//  app.use(cors({ origin: 'http://localhost:3000' }))
+  app.use(cors({ origin: 'https://ecom-store-9ttd.vercel.app' }))
+// app.use(cors({ origin: 'http://localhost:3000' }))
 
 // http://localhost:3000
 app.use(express.json());
@@ -22,7 +22,7 @@ app.use(express.urlencoded({extended:false}));
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, '../frontend/src/assets')); // Set the destination folder
+    cb(null, path.join(__dirname, '../frontend/public/assets')); // Set the destination folder
   },
   filename: (req, file, cb) => {
     cb(null, `${Date.now()}-${file.originalname}`); // Use a timestamp for unique filenames
@@ -40,7 +40,8 @@ app.use('/api/cart',require('./Routes/cartRoutes'));
 app.use('/api/address',require('./Routes/addressRoutes'));
 app.use('/api/order',require('./Routes/orderRoutes'));
 
-app.use('/assets', express.static(path.join(__dirname, '../frontend/src/assets')));
+const absolutePath = path.resolve(__dirname, '../frontend/public/assets');
+app.use('/assets', express.static(absolutePath));
 
 // Image upload endpoint
 app.post('/api/upload', upload.single('myFile'), (req, res) => {

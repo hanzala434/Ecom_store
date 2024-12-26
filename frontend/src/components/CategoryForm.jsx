@@ -27,10 +27,13 @@ const CategoryForm = () => {
   
   
     const handleFileChange = (event) => {
+      event.preventDefault();
+      console.log('File input changed:', event.target.files[0]);
       setSelectedFile(event.target.files[0]);
     };
   
-    const handleFileUpload = async () => {
+    const handleFileUpload = async (e) => {
+      e.preventDefault();
       if (!selectedFile) return;
   
       const formData = new FormData();
@@ -117,6 +120,8 @@ const CategoryForm = () => {
           
           {/* Image Upload */}
           <div className="mb-5">
+          <form onSubmit={(e) => e.preventDefault()} className="flex flex-col">
+
             <input
               type="file"
               onChange={handleFileChange}
@@ -129,6 +134,7 @@ const CategoryForm = () => {
             >
               Upload Image
             </button>
+            </form>
             <div className="mt-2">
               
                 <span  className="block text-gray-700">
