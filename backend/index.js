@@ -6,6 +6,7 @@ const {errorHandler}=require('./middleware/ErrorMiddleware')
 const cors=require('cors')
 const multer = require('multer');
 const path = require('path');
+const { put } = require('@vercel/blob');
 
 
 
@@ -44,16 +45,30 @@ const absolutePath = path.resolve(__dirname, '../frontend/public/assets');
 app.use('/assets', express.static(absolutePath));
 
 // Image upload endpoint
-app.post('/api/upload', upload.single('myFile'), (req, res) => {
+app.post('/api/upload', upload.single('myFile'),async (req, res) => {
   if (!req.file) {
     return res.status(400).json({ message: 'No file uploaded' });
   }
 
   // const filePath = path.join('../frontend/src/assets', req.file.filename); // Relative path for frontend
-  const filePath = `/assets/${req.file.filename}`; 
-  console.log('Uploaded file:', req.file);
-  console.log(filePath);
-  res.status(200).json({ message: 'File uploaded successfully', filePath });
+//   const filePath = `/assets/${req.file.filename}`; 
+
+//   console.log('Uploaded file:', req.file);
+//   console.log(filePath);
+//   res.status(200).json({ message: 'File uploaded successfully', filePath });
+// });
+try {
+  // Use Vercel Blob API to upload the file
+  const blob = await put(req.file.originalname, req.file.buffer, {
+    access: 'public', // Make the file publicly accessible
+  });
+
+  console.log('Uploaded blob:', blob);
+  res.status(200).json({ message: 'File uploaded successfully', blob });
+} catch (error) {
+  console.error('Blob upload error:', error);
+  res.status(500).json({ message: 'Failed to upload file', error: error.message });
+}
 });
 
 // // Endpoint to view uploaded images (for testing purposes)
