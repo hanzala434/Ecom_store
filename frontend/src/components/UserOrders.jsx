@@ -23,7 +23,7 @@ const UserOrders = () => {
   return (
     <>
     <section className='mt-20'>
-        <div className='flex m-4 p-4 justify-center'>
+        <div className='flex flex-wrap m-4 p-4 justify-center'>
         {orderList && orderList?.length>0?(
             orderList?.map((order)=>(
                 <RecentOrderCard key={order._id} order={order}/>

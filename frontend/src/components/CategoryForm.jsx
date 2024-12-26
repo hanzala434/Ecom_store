@@ -37,8 +37,8 @@ const CategoryForm = () => {
       formData.append('myFile', selectedFile, selectedFile.name);
   
       try {
-        const response = await axios.post('http://localhost:8080/api/upload', formData);
-         const uploadedImagePath = response.data.filePath;
+        const response = await axios.post(`${process.env.REACT_APP_API}/api/upload`, formData);
+        const uploadedImagePath = response.data.filePath;
         console.log(uploadedImagePath);
         setFormData((prevState) => ({
           ...prevState,

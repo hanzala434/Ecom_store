@@ -37,11 +37,12 @@ const Header = () => {
 const navigation = [
   { name: 'About us', href: '/about-us' },
   { name: 'Contact', href: '/contact-us' },
-  { name: 'Categories', href: '/category' },
-  { name:'Orders',href:`/your-orders/${userId}`},
-
+  { name: 'Categories', href: '/category' },    
 
 ]
+if (userId) {
+  navigation.push({ name: 'Orders', href: `/your-orders/${userId}` });
+}
 
 const handleCartClick = (e) => {
   e.preventDefault();
@@ -50,6 +51,8 @@ const handleCartClick = (e) => {
     toast.error('Please log in to add items to your cart');
     return;
   }
+
+
 
   // const cartItem = {
     
@@ -155,6 +158,7 @@ const handleCartClick = (e) => {
           className="inline-block size-10 rounded-full ring-2 ring-white"
         />
         </div>
+   
       </div>
     ):(
       <>

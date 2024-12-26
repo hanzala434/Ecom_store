@@ -11,9 +11,9 @@ const RecentOrderCard = ({order}) => {
    <>
    
 
-<div onClick={handleClick} class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 m-4">
+<div onClick={handleClick} class="max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 m-4">
     <a onClick={handleClick}>
-        <img class="rounded-t-lg" src={order.cartItems[0].image} alt="" />
+        <img class="flex justify-center rounded-t-lg" src={order.cartItems[0].image} alt="" />
     </a>
     <div class="p-5">
         <a onClick={handleClick}>

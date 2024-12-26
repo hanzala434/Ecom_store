@@ -2,7 +2,6 @@ import {Routes,Route} from 'react-router-dom'
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
-import PageNotFound from './pages/PageNotFound';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import ProductPage from './pages/ProductPage';
@@ -23,6 +22,7 @@ import OrderListPage from './pages/OrderListPage';
 import CategoryAdmin from './pages/CategoryAdmin';
 import CategoryFormPage from './pages/CategoryFormPage';
 import AdminProductPage from './pages/AdminProductPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 
 
@@ -59,7 +59,7 @@ function App() {
 
 
 
-      <Route path='*' element={<PageNotFound/>}/>
+      <Route path='*' element={<NotFoundPage/>}/>
 
    
     </Routes>
