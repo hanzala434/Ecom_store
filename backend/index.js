@@ -15,7 +15,7 @@ const app=express();
 //middleware
  app.use(cors({ origin: 'https://ecom-store-9ttd.vercel.app' }))
 //  app.use(cors({ origin: process.env.CLIENT_URL }))
- console.log('Allowed CORS origin:', process.env.CLIENT_URL);
+//  console.log('Allowed CORS origin:', process.env.CLIENT_URL);
 
 
 // http://localhost:3000
@@ -51,10 +51,10 @@ app.post('/api/upload', upload.single('myFile'), (req, res) => {
   if (!req.file) {
     return res.status(400).json({ message: 'No file uploaded' });
   }
-  const filePath = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
+  // const filePath = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
 
   //  const filePath = path.join('/uploads', req.file.filename); // Relative path for frontend
-  //const filePath = `/uploads/${req.file.filename}`;
+  const filePath = `/uploads/${req.file.filename}`;
   console.log('Uploaded file:', req.file);
   console.log(filePath);
   res.status(200).json({ message: 'File uploaded successfully', filePath });
