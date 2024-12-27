@@ -27,13 +27,12 @@ const CategoryForm = () => {
   
   
     const handleFileChange = (event) => {
-      event.preventDefault();
       console.log('File input changed:', event.target.files[0]);
       setSelectedFile(event.target.files[0]);
     };
   
     const handleFileUpload = async (e) => {
-      e.preventDefault();
+       e.preventDefault();
       if (!selectedFile) return;
   
       const formData = new FormData();
@@ -48,13 +47,20 @@ const CategoryForm = () => {
           image: uploadedImagePath,
         }));
         console.log('Uploaded file:', uploadedImagePath);
+        
       } catch (error) {
         console.error('Error uploading file:', error);
       }
+      
     };
   
     const handleSubmit = (e) => {
       e.preventDefault();
+
+      if (!selectedFile) {
+        alert('Please upload a file before submitting the form!');
+        return;
+      }
   
       const categoryData = {
         name,
@@ -70,10 +76,9 @@ const CategoryForm = () => {
   return (
     <>
     <section className="mt-24">
-        <h1 className="flex justify-center p-2 font-bold">Enter Product Details</h1>
+        <h1 className="flex justify-center p-2 font-bold">Enter Category Details</h1>
         <form onSubmit={handleSubmit} className="max-w-md mx-auto m-2 p-4">
-          {/* Existing Form Fields */}
-          {/* Name, Price, Description, Highlights, Details */}
+       
           <div className="relative z-0 w-full mb-5 group">
             <input
               type="text"
@@ -120,7 +125,6 @@ const CategoryForm = () => {
           
           {/* Image Upload */}
           <div className="mb-5">
-          <form onSubmit={(e) => e.preventDefault()} className="flex flex-col">
 
             <input
               type="file"
@@ -129,12 +133,11 @@ const CategoryForm = () => {
             />
             <button
               type="button"
-              onClick={handleFileUpload}
+               onClick={handleFileUpload}
               className="mt-2 bg-blue-700 text-white px-3 py-1 rounded"
             >
               Upload Image
             </button>
-            </form>
             <div className="mt-2">
               
                 <span  className="block text-gray-700">

@@ -23,6 +23,8 @@ import CategoryAdmin from './pages/CategoryAdmin';
 import CategoryFormPage from './pages/CategoryFormPage';
 import AdminProductPage from './pages/AdminProductPage';
 import NotFoundPage from './pages/NotFoundPage';
+import PrivateRoutes from './components/PrivateRoutes';
+import PopularItem from './components/PopularItem';
 
 
 
@@ -47,19 +49,75 @@ function App() {
       <Route path='/your-orders/:id' element={<UserOrdersPage/>}/>
       <Route path='/your-orders/order/:id' element={<OrderConfirmed/>}/>
 
-      //Admin Routes
+      {/* //Admin Routes
       <Route path='/adminDashboard' element={<AdminDashboard/>}/>
       <Route path='/adminDashboard/order/:id' element={<OrderDetailAdmin/>}/>
       <Route path='/admin-orders' element={<OrderListPage/>}/>
       <Route path='/admin-category' element={<CategoryAdmin/>}/>
       <Route path='/admin-products/:id' element={<AdminProductPage/>}/>
       <Route path='/add-product/:id' element={<ProductFormPage/>}/>
-      <Route path='/add-category' element={<CategoryFormPage/>}/>
+      <Route path='/add-category' element={<CategoryFormPage/>}/> */}
 
+   {/* Admin Routes */}
+   <Route
+        path="/adminDashboard"
+        element={
+          <PrivateRoutes>
+            <AdminDashboard />
+          </PrivateRoutes>
+        }
+      />
+      <Route
+        path="/adminDashboard/order/:id"
+        element={
+          <PrivateRoutes>
+            <OrderDetailAdmin />
+          </PrivateRoutes>
+        }
+      />
+      <Route
+        path="/admin-orders"
+        element={
+          <PrivateRoutes>
+            <OrderListPage />
+          </PrivateRoutes>
+        }
+      />
+      <Route
+        path="/admin-category"
+        element={
+          <PrivateRoutes>
+            <CategoryAdmin />
+          </PrivateRoutes>
+        }
+      />
+      <Route
+        path="/admin-products/:id"
+        element={
+          <PrivateRoutes>
+            <AdminProductPage />
+          </PrivateRoutes>
+        }
+      />
+      <Route
+        path="/add-product/:id"
+        element={
+          <PrivateRoutes>
+            <ProductFormPage />
+          </PrivateRoutes>
+        }
+      />
+      <Route
+        path="/add-category"
+        element={
+          <PrivateRoutes>
+            <CategoryFormPage />
+          </PrivateRoutes>
+        }
+      />
 
-
-
-      <Route path='*' element={<NotFoundPage/>}/>
+      {/* Fallback Route */}
+      <Route path="*" element={<NotFoundPage />} />
 
    
     </Routes>

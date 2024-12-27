@@ -13,8 +13,10 @@ const { put } = require('@vercel/blob');
 connectDB();
 const app=express();
 //middleware
-  app.use(cors({ origin: 'https://ecom-store-9ttd.vercel.app' }))
-// app.use(cors({ origin: 'http://localhost:3000' }))
+  // app.use(cors({ origin: 'https://ecom-store-9ttd.vercel.app' }))
+ app.use(cors({ origin: process.env.CLIENT_URL }))
+ console.log('Allowed CORS origin:', process.env.CLIENT_URL);
+
 
 // http://localhost:3000
 app.use(express.json());
@@ -23,7 +25,7 @@ app.use(express.urlencoded({extended:false}));
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, '../frontend/public/assets')); // Set the destination folder
+    cb(null, path.join(__dirname, 'uploads')); // Set the destination folder
   },
   filename: (req, file, cb) => {
     cb(null, `${Date.now()}-${file.originalname}`); // Use a timestamp for unique filenames
@@ -41,34 +43,20 @@ app.use('/api/cart',require('./Routes/cartRoutes'));
 app.use('/api/address',require('./Routes/addressRoutes'));
 app.use('/api/order',require('./Routes/orderRoutes'));
 
-const absolutePath = path.resolve(__dirname, '../frontend/public/assets');
-app.use('/assets', express.static(absolutePath));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 
 // Image upload endpoint
-app.post('/api/upload', upload.single('myFile'),async (req, res) => {
+app.post('/api/upload', upload.single('myFile'), (req, res) => {
   if (!req.file) {
     return res.status(400).json({ message: 'No file uploaded' });
   }
-
-  // const filePath = path.join('../frontend/src/assets', req.file.filename); // Relative path for frontend
-//   const filePath = `/assets/${req.file.filename}`; 
-
-//   console.log('Uploaded file:', req.file);
-//   console.log(filePath);
-//   res.status(200).json({ message: 'File uploaded successfully', filePath });
-// });
-try {
-  // Use Vercel Blob API to upload the file
-  const blob = await put(req.file.originalname, req.file.buffer, {
-    access: 'public', // Make the file publicly accessible
-  });
-
-  console.log('Uploaded blob:', blob);
-  res.status(200).json({ message: 'File uploaded successfully', blob });
-} catch (error) {
-  console.error('Blob upload error:', error);
-  res.status(500).json({ message: 'Failed to upload file', error: error.message });
-}
+ 
+   const filePath = path.join('/uploads', req.file.filename); // Relative path for frontend
+  //const filePath = `/uploads/${req.file.filename}`;
+  console.log('Uploaded file:', req.file);
+  console.log(filePath);
+  res.status(200).json({ message: 'File uploaded successfully', filePath });
 });
 
 // // Endpoint to view uploaded images (for testing purposes)

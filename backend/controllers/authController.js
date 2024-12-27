@@ -5,7 +5,7 @@ const jwt=require('jsonwebtoken')
 const { OAuth2Client } = require('google-auth-library');
 
 const registerUser= asyncHandler(async (req,res)=>{
-        const {name,email,password,address,phone}=req.body
+        const {name,email,password,address,phone,role}=req.body
     
         if(!name || !email || !password ||!address||!phone){
             res.status(400)
@@ -27,7 +27,8 @@ const registerUser= asyncHandler(async (req,res)=>{
             email,
             password:hashedPassword,
             address,
-            phone
+            phone,
+            role
         })
     
         if(user){
@@ -36,7 +37,8 @@ const registerUser= asyncHandler(async (req,res)=>{
             name:user.name,
             email:user.email,
             token:generateToken(user.id),
-            phone:user.phone
+            phone:user.phone,
+            role:user.role
         })
         }else{
             res.status(400)
