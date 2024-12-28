@@ -41,7 +41,7 @@ import { useNavigate } from 'react-router-dom';
 
 
     return (
-      <Dialog open={open} onClose={setOpen} className="relative z-10">
+      <Dialog open={open} onClose={setOpen} className="absolute z-10 ">
         <DialogBackdrop className="fixed inset-0 bg-gray-500/75" />
 
         <div className="fixed inset-0 overflow-hidden">

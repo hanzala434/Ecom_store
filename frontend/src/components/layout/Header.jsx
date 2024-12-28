@@ -23,7 +23,7 @@ const Header = () => {
   const[cartItem,setCartItems]=useState([]);
   const [cartOpen, setCartOpen] = useState(false);
 
- 
+
 
   const onLogOut=()=>{
     dispatch(logout())
@@ -81,7 +81,7 @@ const handleCartClick = (e) => {
 
 
   return (
-    <header className="absolute inset-x-0 top-0  z-50 ">
+    <header className="absolute inset-x-0 top-0  ">
     <nav aria-label="Global" className="flex items-center justify-between p-4 lg:px-8">
       <div className="flex lg:flex-1">
         <a href="/" className="-m-1.5 p-1.5">
@@ -179,7 +179,7 @@ const handleCartClick = (e) => {
                 <svg class="size-6 shrink-0 text-gray-400 group-hover:text-gray-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
                 </svg>
-                <span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
+                <span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">{cart?.items?.length || 0}</span>
                 <span class="sr-only">items in cart, view bag</span>
               </a>
               <ShoppingCart open={cartOpen} setOpen={setCartOpen}  />
