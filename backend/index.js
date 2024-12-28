@@ -14,12 +14,12 @@ connectDB();
 const app=express();
 //middleware
  app.use(cors({ origin: 'https://ecom-store-9ttd.vercel.app' }))
-//  app.use(cors({ origin: process.env.CLIENT_URL }))
-<<<<<<< HEAD
-//  console.log('Allowed CORS origin:', process.env.CLIENT_URL);
-=======
- // console.log('Allowed CORS origin:', process.env.CLIENT_URL);
->>>>>>> b9451ca1c2f49b59d25a6b0bee2e7ff191fd8645
+//   app.use(cors({ origin: process.env.CLIENT_URL }))
+// // <<<<<<< HEAD
+//   console.log('Allowed CORS origin:', process.env.CLIENT_URL);
+// // =======
+//  // console.log('Allowed CORS origin:', process.env.CLIENT_URL);
+// >>>>>>> b9451ca1c2f49b59d25a6b0bee2e7ff191fd8645
 
 
 // http://localhost:3000
