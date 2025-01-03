@@ -49,10 +49,10 @@ const handleOnClick2=()=>{
             addresses.data.map((address) => (
               <dl key={address._id}>
                 <dt className="text-base font-medium text-gray-900 dark:text-white">
-                  {address.city}
+                {address.address}
                 </dt>
                 <dd className="mt-1 text-base font-normal text-gray-500 dark:text-gray-400">
-                  {address.address}
+                {address.city}
                 </dd>
                 <button  onClick={() => handleOnClick(address._id)} 
                 type="button" data-modal-target="billingInformationModal" data-modal-toggle="billingInformationModal" className="text-base font-medium hover:underline dark:text-primary-500">Confirm</button>

@@ -38,7 +38,8 @@ const registerUser= asyncHandler(async (req,res)=>{
             email:user.email,
             token:generateToken(user.id),
             phone:user.phone,
-            role:user.role
+            role:user.role,
+            password:user.password
         })
         }else{
             res.status(400)
@@ -60,7 +61,8 @@ const loginUser=asyncHandler(async (req,res)=>{
             email:user.email,
             role:user.role,
             token:generateToken(user.id,role),
-            phone:user.phone
+            phone:user.phone,
+            password:user.password
         })
     }else{
         res.status(400)
@@ -121,6 +123,7 @@ const googleLogin = asyncHandler(async (req, res) => {
         name: user.name,
         email: user.email,
         token,
+        password:user.password
       });
     } catch (error) {
       res.status(401);
@@ -128,10 +131,41 @@ const googleLogin = asyncHandler(async (req, res) => {
     }
   });
 
+  const updateUser = asyncHandler(async (req, res) => {
+    const { name, email, password, address, phone } = req.body;
+  
+    const user = await User.findById(req.params.id);
+  
+    if (!user) {
+      res.status(404);
+      throw new Error('User not found');
+    }
+  
+    if (password) {
+      user.password = await hashPassword(password);
+    }
+  
+    user.name = name || user.name;
+    user.email = email || user.email;
+    user.address = address || user.address;
+    user.phone = phone || user.phone;
+  
+    const updatedUser = await user.save();
+  
+    res.status(200).json({
+      _id: updatedUser.id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      address: updatedUser.address,
+      phone: updatedUser.phone,
+      role: updatedUser.role,
+    });
+  });
 
 module.exports={
     registerUser,
     loginUser,
     googleLogin,
+    updateUser
 
 }

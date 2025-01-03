@@ -13,20 +13,10 @@ const { put } = require('@vercel/blob');
 connectDB();
 const app=express();
 //middleware
- app.use(cors({ origin: 'https://ecom-store-9ttd.vercel.app' }))
-// <<<<<<< HEAD
-// //   app.use(cors({ origin: process.env.CLIENT_URL }))
-// // // <<<<<<< HEAD
+  app.use(cors({ origin: 'https://ecom-store-9ttd.vercel.app' }))
+  //  app.use(cors({ origin: process.env.CLIENT_URL }))
+
 // //   console.log('Allowed CORS origin:', process.env.CLIENT_URL);
-// // // =======
-// =======
-// //  app.use(cors({ origin: process.env.CLIENT_URL }))
-// // <<<<<<< HEAD
-// // //  console.log('Allowed CORS origin:', process.env.CLIENT_URL);
-// // =======
-// >>>>>>> dff8b8a26b4cde0f103c4f5c561715bb638dc8fb
-// //  // console.log('Allowed CORS origin:', process.env.CLIENT_URL);
-// // >>>>>>> b9451ca1c2f49b59d25a6b0bee2e7ff191fd8645
 
 
 // http://localhost:3000

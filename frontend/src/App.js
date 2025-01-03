@@ -25,6 +25,9 @@ import AdminProductPage from './pages/AdminProductPage';
 import NotFoundPage from './pages/NotFoundPage';
 import PrivateRoutes from './components/PrivateRoutes';
 import PopularItem from './components/PopularItem';
+import UserAddressPage from './pages/UserAddressPage';
+import ProfilePage from './pages/ProfilePage';
+import EditProfilePage from './pages/EditProfilePage';
 
 
 
@@ -47,6 +50,12 @@ function App() {
       <Route path='/orders/:id' element={<OrdersPage/>}/>
       <Route path='/category/:id' element={<CategoryProducts/>}/>
       <Route path='/your-orders/:id' element={<UserOrdersPage/>}/>
+      <Route path='/your-addresses' element={<UserAddressPage/>}/>
+      <Route path='/your-profile' element={<ProfilePage/>}/>
+      <Route path='/edit-profile' element={<EditProfilePage/>}/>
+
+
+
       <Route path='/your-orders/order/:id' element={<OrderConfirmed/>}/>
 
       {/* //Admin Routes

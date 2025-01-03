@@ -22,7 +22,7 @@ const Header = () => {
   const {category}=useSelector((state)=>state.category)
   const[cartItem,setCartItems]=useState([]);
   const [cartOpen, setCartOpen] = useState(false);
-
+  const [avatarDropdownOpen, setAvatarDropdownOpen] = useState(false);
 
 
   const onLogOut=()=>{
@@ -146,40 +146,66 @@ const handleCartClick = (e) => {
 
 
       </div>
-      {user?(    
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-        <button onClick={onLogOut} className="text-sm/6 font-semibold text-slate-900">
-          Logout <span aria-hidden="true">&rarr;</span>
-        </button>
-        <div className="flex m-2">
-            <img
-          alt=""
-          src={avatar}
-          className="inline-block size-10 rounded-full ring-2 ring-white"
-        />
-        </div>
-   
-      </div>
-    ):(
-      <>
-      <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-      <a href="/register" className="text-sm/6 font-semibold text-gray-900">
-        Register-Now
-      </a>
-    </div>
-     <div className="ml-3">
-        <a href="/login" className="text-sm/6 font-semibold text-gray-900">
-          Log in
-        </a>
-      </div>
-    </>
-    )}
+          {/* Avatar Dropdown */}
+          <div className="relative ml-4">
+            <button
+              onClick={() => setAvatarDropdownOpen(!avatarDropdownOpen)}
+              className="flex items-center focus:outline-none"
+            >
+              <img
+                src={avatar}
+                alt="User Avatar"
+                className="w-10 h-10 rounded-full border-2 border-gray-300"
+              />
+            </button>
+            {avatarDropdownOpen && (
+              <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg z-20">
+                {user ? (
+                  <>
+                    <Link
+                      to="/your-profile"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      Profile
+                    </Link>
+                    <Link
+                      to="/your-addresses"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      Addresses
+                    </Link>
+                    <button
+                      onClick={onLogOut}
+                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      Logout
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <Link
+                      to="/login"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      Sign In
+                    </Link>
+                    <Link
+                      to="/register"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      Sign Up
+                    </Link>
+                  </>
+                )}
+              </div>
+            )}
+          </div>
     <div class="ml-1 flow-root lg:ml-1">
               <a onClick={handleCartClick} href="#" class="group -m-2 flex items-center p-2">
                 <svg class="size-6 shrink-0 text-gray-400 group-hover:text-gray-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
                 </svg>
-                <span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">{cart?.items?.length || 0}</span>
+                <span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">{cart?.data?.items?.length || 0}</span>
                 <span class="sr-only">items in cart, view bag</span>
               </a>
               <ShoppingCart open={cartOpen} setOpen={setCartOpen}  />
