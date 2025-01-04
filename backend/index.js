@@ -13,9 +13,10 @@ const { put } = require('@vercel/blob');
 connectDB();
 const app=express();
 //middleware
-  app.use(cors({ origin: 'https://ecom-store-9ttd.vercel.app' }))
+  // app.use(cors({ origin: 'https://ecom-store-9ttd.vercel.app' }))
   //  app.use(cors({ origin: process.env.CLIENT_URL }))
-
+  app.use(cors({ origin: ' https://www.celebmerch.shop' }))
+ 
 // //   console.log('Allowed CORS origin:', process.env.CLIENT_URL);
 
 
