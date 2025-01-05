@@ -14,6 +14,16 @@ const register=async(userData)=>{
     return res.data
 }
 
+//update user
+const updateUser=async(userData,id)=>{
+    const res=await axios.post(`${API_URL}/update-user/${id}`,userData)
+    
+    if(res.data){
+        localStorage.setItem('user',JSON.stringify(res.data))
+    }
+    return res.data
+}
+
 //login user
 const login=async(userData)=>{
     const res=await axios.post(API_URL+'/login',userData)
@@ -42,7 +52,8 @@ const authService={
     register,
     logout,
     login,
-    googleLogin
+    googleLogin,
+    updateUser
 }
 
 export default authService

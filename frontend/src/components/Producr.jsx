@@ -35,7 +35,7 @@ const Producr = () => {
     
   return (
  <>
-  <div className="bg-slate-50 mt-16">
+  <div className="bg-white mt-16">
   {product ? (
       <ProductFeatures key={product._id} product={product} />
     ) : (

@@ -16,14 +16,16 @@ const ProductItem = ({products}) => {
     };
   return (
 <>
-<div>
+<div className='rounded-2xl shadow-xl p-2'>
 <a onClick={handleProductClick}  key={products.id} className="group">
               <img
                 src={products.images[0]}
-                className="aspect-square w-full rounded-lg bg-gray-200 object-cover group-hover:opacity-75 xl:aspect-[7/8]"
+                className="aspect-square w-full rounded bg-white object-contain group-hover:opacity-75 xl:aspect-[7/8]"
               />
-              <h3 className="mt-4 text-sm text-gray-700 max-lg:text-xl">{products.name}</h3>
+              <div className='p-2'>
+              <h3 className="mt-4 text-sm text-gray-700 max-lg:text-xl ">{products.name}</h3>
               <p className="mt-1 text-lg font-medium text-gray-900 max-lg:text-xl">{products.price}</p>
+              </div>
             </a>
 </div>
 </>

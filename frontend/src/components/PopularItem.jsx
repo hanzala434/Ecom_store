@@ -16,15 +16,15 @@ const PopularItem = ({product}) => {
 
   return (
    <>
-   <div onClick={handleProductClick}  key={product.id} className="group relative">
+   <div onClick={handleProductClick}  key={product.id} className="group relative rounded-2xl p-2 shadow-xl">
               <img
                 // alt={product.imageAlt}
                 src={product.images[0]}
-                className="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80"
+                className="aspect-square w-full rounded-md bg-white object-contain group-hover:opacity-75 lg:aspect-auto lg:h-80"
               />
-              <div className="mt-4 flex justify-between">
+              <div className="mt-4 flex justify-between p-2">
                 <div>
-                  <h3 className="text-sm text-gray-700 max-lg:text-xl">
+                  <h3 className="text-xl text-gray-700 max-lg:text-xl">
                     <a href={product._id}>
                       <span aria-hidden="true" className="absolute inset-0" />
                       {product.name}

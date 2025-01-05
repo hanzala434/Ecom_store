@@ -6,16 +6,18 @@ const {errorHandler}=require('./middleware/ErrorMiddleware')
 const cors=require('cors')
 const multer = require('multer');
 const path = require('path');
-const { put } = require('@vercel/blob');
-
+const nodemailer = require('nodemailer');
+const bodyParser = require('body-parser');
 
 
 connectDB();
 const app=express();
+app.use(bodyParser.json());
+
 //middleware
   // app.use(cors({ origin: 'https://ecom-store-9ttd.vercel.app' }))
-  //  app.use(cors({ origin: process.env.CLIENT_URL }))
-  app.use(cors({ origin: ' https://www.celebmerch.shop' }))
+   app.use(cors({ origin: process.env.CLIENT_URL }))
+  // app.use(cors({ origin: ' https://www.celebmerch.shop' }))
  
 // //   console.log('Allowed CORS origin:', process.env.CLIENT_URL);
 
@@ -71,6 +73,32 @@ app.post('/api/upload', upload.single('myFile'), (req, res) => {
 // });
 
 // app.use('/assets', express.static(path.join(__dirname, 'frontend','src')));
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'marketease343@gmail.com', // Replace with your Gmail
+    pass: 'axus rlmg epax ycrd'   // Use an App Password if you have 2FA enabled
+  }
+});
+
+app.post('/send-email', (req, res) => {
+  const { firstName, lastName, email, message,phone } = req.body;
+  console.log(message);
+  console.log(email);
+  const mailOptions = {
+    from: email,
+    to: 'marketease343@gmail.com', 
+    subject: 'Customer Support Merge',
+    text: `Name: ${firstName} ${lastName}\nEmail: ${email}\nMessage: ${message}`
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      return res.status(500).send(error.toString());
+    }
+    res.status(200).send('Email sent: ' + info.response);
+  });
+});
 
 
 app.use(errorHandler);

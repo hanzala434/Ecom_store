@@ -15,11 +15,11 @@ const CategoryItem = ({category}) => {
       };
   return (
     <>
-    <div key={category.name} className="group relative m-4">
+    <div key={category.name} className="group relative m-4 bg-white border shadow-xl p-4 rounded-xl">
                 <img
                   alt={category.imageAlt}
                   src={category.image}
-                  className="w-full rounded-lg bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square"
+                  className="w-full rounded-lg shadow bg-white object-contain group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square"
                 />
                 <h3 className="mt-6 text-sm text-gray-500">
                   <a onClick={handleCategoryClick}>

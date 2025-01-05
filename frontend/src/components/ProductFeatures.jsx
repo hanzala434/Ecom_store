@@ -80,9 +80,9 @@ const ProductFeatures = ({product}) => {
   
   
   return (
-    <div>
+    <div >
 
-       <div className="pt-6">
+       <div className="pt-6 p-2">
             
  
 
@@ -96,7 +96,7 @@ const ProductFeatures = ({product}) => {
               alt={`Product image ${index + 1}`}
               className={classNames(
                 index === 0 ? 'lg:block' : '',
-                'rounded-lg object-cover max-lg:m-2 max-lg:w-full',
+                'rounded-lg object-cover max-lg:m-2 max-lg:w-full p-4 border shadow-xl ',
                 index === 2 ? 'lg:aspect-[3/4]' : 'lg:aspect-[4/5]'
               )}
             />

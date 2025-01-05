@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateUser } from '../features/auth/authSlice';
+import { useNavigate } from 'react-router-dom';
 
 const EditProfile = () => {
   const {user}=useSelector((state)=>state.auth)
+  const id=useSelector((state)=>state.auth.user._id)
+  const dispatch=useDispatch()
+  const navigate=useNavigate()
   const [formData, setFormData] = useState({
     name:user.name,
     email:user.email,
@@ -28,12 +33,20 @@ const EditProfile = () => {
     setEditingField(null);
   };
 
+  const handleSubmit=()=>{
+    console.log(formData)
+    console.log(id)
+    dispatch(updateUser({formData,id}))
+    navigate('/your-profile')
+
+  }
+
   return (
    <>
-   <section className='mt-20'>
+   <section className='mt-20 m-2 p-4'>
    <div className="p-6 max-w-lg mx-auto bg-white shadow-md rounded-md">
       <h1 className="text-2xl font-bold mb-4">Editable Profile</h1>
-      <form className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-4">
         {Object.keys(formData).map((field) => (
           <div key={field} className="flex items-center space-x-4">
             <label className="w-24 font-medium capitalize" htmlFor={field}>
@@ -70,6 +83,11 @@ const EditProfile = () => {
             )}
           </div>
         ))}
+        <div className='bg-blue-800 text-white rounded flex justify-center m-auto w-52 p-2 hover:bg-blue-700'>
+        <button type='submit'>
+          Add Changes
+        </button>
+        </div>
       </form>
     </div>
    </section>

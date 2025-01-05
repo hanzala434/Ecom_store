@@ -7,8 +7,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Layout = ({
   children,
-  title = 'Ecommerce App',
-  description = 'Ecom Proj',
+  title = 'Merge',
+  description = 'Merge',
   keyword = 'mern,react,node,mongodb',
   author = 'Unknown'
 }) => {
