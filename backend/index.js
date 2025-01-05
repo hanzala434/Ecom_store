@@ -16,8 +16,8 @@ app.use(bodyParser.json());
 
 //middleware
   // app.use(cors({ origin: 'https://ecom-store-9ttd.vercel.app' }))
-   app.use(cors({ origin: process.env.CLIENT_URL }))
-  // app.use(cors({ origin: ' https://www.celebmerch.shop' }))
+  //  app.use(cors({ origin: process.env.CLIENT_URL }))
+   app.use(cors({ origin: ' https://www.celebmerch.shop' }))
  
 // //   console.log('Allowed CORS origin:', process.env.CLIENT_URL);
 
@@ -81,7 +81,7 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-app.post('/send-email', (req, res) => {
+app.post('/api/send-email', (req, res) => {
   const { firstName, lastName, email, message,phone } = req.body;
   console.log(message);
   console.log(email);

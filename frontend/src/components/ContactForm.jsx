@@ -24,7 +24,7 @@ const ContactForm = () => {
       e.preventDefault();
       console.log(formData);
       try {
-        const response = await fetch(`${process.env.REACT_APP_API}/send-email`, {
+        const response = await fetch(`${process.env.REACT_APP_API}/api/send-email`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
