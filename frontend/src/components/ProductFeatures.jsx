@@ -96,7 +96,7 @@ const ProductFeatures = ({product}) => {
               alt={`Product image ${index + 1}`}
               className={classNames(
                 index === 0 ? 'lg:block' : '',
-                'rounded-lg object-cover max-lg:m-2 max-lg:w-full p-4 border shadow-xl ',
+                'rounded-lg object-contain max-lg:m-2 max-lg:w-full p-4 border shadow-xl ',
                 index === 2 ? 'lg:aspect-[3/4]' : 'lg:aspect-[4/5]'
               )}
             />
@@ -250,13 +250,13 @@ const ProductFeatures = ({product}) => {
                   <h3 className="text-sm font-medium text-gray-900">Highlights</h3>
     
                   <div className="mt-4">
-                    {/* <ul role="list" className="list-disc space-y-2 pl-4 text-sm">
+                    <ul role="list" className="list-disc space-y-2 pl-4 text-sm">
                       {product.highlights.map((highlight) => (
                         <li key={highlight} className="text-gray-400">
                           <span className="text-gray-600">{highlight}</span>
                         </li>
                       ))}
-                    </ul> */}
+                    </ul>
                   </div>
                 </div>
     
