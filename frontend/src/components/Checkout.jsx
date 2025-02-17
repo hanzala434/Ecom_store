@@ -28,9 +28,10 @@ const Checkout = () => {
 
 const handleOnClick = (id) => {
   // Navigate to the orders page and dispatch the address details
-  dispatch(getAddressDetails(id));
-  dispatch(fetchCart(userId));
-  navigate(`/orders/${id}`);
+  // dispatch(getAddressDetails(id));
+  // dispatch(fetchCart(userId));
+  // navigate(`/orders/${id}`);
+  navigate('/payment-form');
 };
 
 const handleOnClick2=()=>{

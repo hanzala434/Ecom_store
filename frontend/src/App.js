@@ -28,6 +28,7 @@ import PopularItem from './components/PopularItem';
 import UserAddressPage from './pages/UserAddressPage';
 import ProfilePage from './pages/ProfilePage';
 import EditProfilePage from './pages/EditProfilePage';
+import PaymentFormPage from './pages/PaymentFormPage';
 
 
 
@@ -53,6 +54,7 @@ function App() {
       <Route path='/your-addresses' element={<UserAddressPage/>}/>
       <Route path='/your-profile' element={<ProfilePage/>}/>
       <Route path='/edit-profile' element={<EditProfilePage/>}/>
+      <Route path='/payment-form' element={<PaymentFormPage/>}/>
 
 
 

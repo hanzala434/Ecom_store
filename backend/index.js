@@ -8,6 +8,7 @@ const multer = require('multer');
 const path = require('path');
 const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
+const fs = require("fs");
 
 
 connectDB();
@@ -22,22 +23,40 @@ app.use(bodyParser.json());
 // //   console.log('Allowed CORS origin:', process.env.CLIENT_URL);
 
 
-// http://localhost:3000
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
+const uploadDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir);
+}
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, 'uploads')); // Set the destination folder
+    cb(null, uploadDir); // Set the destination folder
   },
   filename: (req, file, cb) => {
-    cb(null, `${Date.now()}-${file.originalname}`); // Use a timestamp for unique filenames
+    cb(null, `${Date.now()}-${file.originalname}`); // Use timestamp for unique filenames
   },
 });
 
-const upload = multer({ storage });
-const imagesArray = [];
+const fileFilter = (req, file, cb) => {
+  const allowedTypes = /jpeg|jpg|png|gif/;
+  const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
+  const mimetype = allowedTypes.test(file.mimetype);
+
+  if (extname && mimetype) {
+    return cb(null, true);
+  } else {
+    return cb(new Error('Only images are allowed!'));
+  }
+};
+
+const upload = multer({
+  storage,
+  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
+  fileFilter,
+});
 
 //routes
 app.use('/api/users',require('./Routes/authRoutes'));
@@ -46,8 +65,10 @@ app.use('/api/category',require('./Routes/categoryRoutes'));
 app.use('/api/cart',require('./Routes/cartRoutes'));
 app.use('/api/address',require('./Routes/addressRoutes'));
 app.use('/api/order',require('./Routes/orderRoutes'));
+app.use('/api/credit-card',require('./Routes/creditcardRoutes'));
 
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+app.use('/uploads', express.static(uploadDir));
 
 
 // Image upload endpoint
@@ -55,29 +76,18 @@ app.post('/api/upload', upload.single('myFile'), (req, res) => {
   if (!req.file) {
     return res.status(400).json({ message: 'No file uploaded' });
   }
-  // const filePath = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
 
-  //  const filePath = path.join('/uploads', req.file.filename); // Relative path for frontend
   const filePath = `/uploads/${req.file.filename}`;
   console.log('Uploaded file:', req.file);
-  console.log(filePath);
   res.status(200).json({ message: 'File uploaded successfully', filePath });
 });
 
-// // Endpoint to view uploaded images (for testing purposes)
-// app.get('/api/images', (req, res) => {
-//   let html = imagesArray
-//     .map((image) => `<img src="/${image}" alt="Uploaded Image" style="width:100px; height:auto;">`)
-//     .join('');
-//   res.send(`<div>${html}</div>`);
-// });
 
-// app.use('/assets', express.static(path.join(__dirname, 'frontend','src')));
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'marketease343@gmail.com', // Replace with your Gmail
-    pass: process.env.APP_PASS   // Use an App Password if you have 2FA enabled
+    user: 'marketease343@gmail.com', 
+    pass: process.env.APP_PASS 
   }
 });
 

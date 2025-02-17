@@ -2,8 +2,8 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import categoryService from './categoryService';
 
 const initialState = {
-    category: [], // Array to hold all products
-    categorySingle: null, // Single product (for details or editing)
+    category: [], 
+    categorySingle: null,
     isError: false,
     isSuccess: false,
     isLoading: false,

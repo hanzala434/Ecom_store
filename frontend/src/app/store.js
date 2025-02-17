@@ -5,6 +5,7 @@ import categoryReducer from '../features/category/categorySlice'
 import cartReducer from '../features/cart/cartSlice'
 import orderReducer from '../features/order/orderSlice'
 import addressReducer from '../features/address/addressSlice'
+import paymentReducer from '../features/payment/paymentSlice'
 
 export const store = configureStore({
     reducer: {
@@ -13,7 +14,9 @@ export const store = configureStore({
       category:categoryReducer,
       cart:cartReducer,
       order:orderReducer,
-      address:addressReducer
+      address:addressReducer,
+      payment:paymentReducer
+
 
     },
   })
