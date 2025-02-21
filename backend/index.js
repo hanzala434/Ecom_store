@@ -9,6 +9,7 @@ const path = require('path');
 const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
 const fs = require("fs");
+const https = require('https');
 
 
 connectDB();
@@ -16,9 +17,9 @@ const app=express();
 app.use(bodyParser.json());
 
 //middleware
-   app.use(cors({ origin: 'https://ecom-store-9ttd.vercel.app' }))
+  //  app.use(cors({ origin: 'https://ecom-store-9ttd.vercel.app' }))
   // app.use(cors({ origin: process.env.CLIENT_URL }))
-   //app.use(cors({ origin: ' https://www.celebmerch.shop' }))
+   app.use(cors({ origin: ' https://www.celebmerch.shop' }))
  
 // //   console.log('Allowed CORS origin:', process.env.CLIENT_URL);
 
